@@ -4,132 +4,651 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Daniel</title>
+  <title>Daniel — Principal Software Engineer</title>
   <meta
     name="description"
-    content="Software engineer. Builder of things."
+    content="Daniel — Principal Software Engineer. Games, distributed systems, AI, automation, and questionable side projects."
   />
+
+  <meta property="og:title" content="Daniel — Principal Software Engineer" />
+  <meta
+    property="og:description"
+    content="Games, distributed systems, AI, automation, and questionable side projects."
+  />
+  <meta property="og:type" content="website" />
+
+  <meta name="theme-color" content="#070a08" />
+
+  <!--
+    You looked at the source.
+
+    Good.
+
+    No React.
+    No Next.js.
+    No webpack.
+    No node_modules.
+    No cookie banner.
+    No analytics.
+    No tracking.
+
+    It's a personal homepage.
+    It doesn't need a framework.
+
+    Try the Konami code.
+    Or open DevTools and run:
+
+      daniel.help()
+  -->
 
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0b0f10;
-      --text: #d7e0df;
-      --muted: #778582;
-      --accent: #71f79f;
+
+      --bg: #070a08;
+      --panel: #0b0f0c;
+      --panel-soft: #0d120f;
+      --text: #e6ece8;
+      --muted: #86918a;
+      --faint: #4e5751;
+      --line: #253028;
+      --green: #67ff7c;
+      --green-soft: #35c74c;
+      --danger: #ff6b6b;
+
+      --mono:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        "Courier New",
+        monospace;
+
+      --sans:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html,
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      min-height: 100%;
-    }
-
-    body {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
 
       background:
-        radial-gradient(circle at 50% 30%, #13201a 0%, transparent 35%),
-        var(--bg);
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(49, 173, 74, 0.12),
+          transparent 34rem
+        ),
+        linear-gradient(var(--bg), #050706);
 
       color: var(--text);
-      font-family:
-        "SFMono-Regular",
-        Consolas,
-        "Liberation Mono",
-        Menlo,
-        monospace;
+      font-family: var(--mono);
+      line-height: 1.6;
     }
 
-    main {
-      width: 100%;
-      max-width: 720px;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+
+      opacity: 0.035;
+
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.7) 3px
+        );
     }
 
-    .prompt {
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2.8rem, 10vw, 6rem);
-      line-height: 0.95;
-      letter-spacing: -0.08em;
-    }
-
-    .role {
-      margin: 0 0 28px;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .bio {
-      max-width: 580px;
-      margin-bottom: 40px;
-      font-family: system-ui, sans-serif;
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      line-height: 1.55;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 24px;
+    ::selection {
+      color: var(--bg);
+      background: var(--green);
     }
 
     a {
-      position: relative;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding-bottom: 70px;
+    }
+
+    /* ---------- topbar ---------- */
+
+    .topbar {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+
+      color: var(--green);
+    }
+
+    .topbar__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+
+      border-radius: 999px;
+      background: var(--green);
+
+      box-shadow: 0 0 18px rgba(103, 255, 124, 0.6);
+    }
+
+    /* ---------- hero ---------- */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 56px;
+
+      padding: 72px 0 36px;
+    }
+
+    .hero__intro {
+      min-width: 0;
+    }
+
+    .name {
+      margin: 0;
+
+      font-size: clamp(3.8rem, 10vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: -0.09em;
+
+      font-weight: 650;
+    }
+
+    .cursor-block {
+      display: inline-block;
+
+      width: 0.48em;
+      height: 0.83em;
+
+      margin-left: 0.08em;
+
+      vertical-align: -0.03em;
+
+      background: var(--green);
+
+      animation: blink 1s step-end infinite;
+    }
+
+    .role {
+      margin-top: 24px;
+      margin-bottom: 0;
+
+      font-size: clamp(1rem, 2vw, 1.25rem);
+    }
+
+    .comment {
+      color: var(--green-soft);
+    }
+
+    .bio {
+      max-width: 690px;
+
+      margin-top: 44px;
+      margin-bottom: 0;
+
+      color: #cfd7d2;
+
+      font-family: var(--sans);
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      line-height: 1.65;
+    }
+
+    .location {
+      margin-top: 42px;
+
+      color: var(--green-soft);
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+
+      margin-top: 42px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      min-height: 48px;
+
+      padding: 0 16px;
+
+      border: 1px solid var(--line);
+      border-radius: 5px;
+
       color: var(--text);
       text-decoration: none;
-      padding-bottom: 4px;
+
+      background: rgba(255,255,255,0.015);
+
+      transition:
+        border-color 140ms ease,
+        background 140ms ease,
+        transform 140ms ease;
     }
 
-    a::before {
-      content: "> ";
-      color: var(--accent);
+    .social-link::before {
+      content: ">_";
+      color: var(--green);
     }
 
-    a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    .social-link:hover,
+    .social-link:focus-visible {
+      border-color: var(--green-soft);
+      background: rgba(103, 255, 124, 0.05);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .social-link__external {
+      color: var(--muted);
+    }
+
+    /* ---------- side panel ---------- */
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018),
+          transparent
+        );
+    }
+
+    .status-panel {
+      padding: 22px;
+    }
+
+    .panel-title {
+      margin: 0 0 16px;
+
+      color: var(--green);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.025em;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+
+      margin: 7px 0;
+    }
+
+    .status-row span:last-child {
+      color: var(--green-soft);
+    }
+
+    .divider {
       height: 1px;
-      background: var(--accent);
+      margin: 22px 0;
 
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 160ms ease;
+      background: var(--line);
     }
 
-    a:hover::after,
-    a:focus-visible::after {
-      transform: scaleX(1);
+    .stat-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+
+      margin: 7px 0;
     }
+
+    .footnote {
+      margin: 12px 0 0;
+
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    /* ---------- command bar ---------- */
+
+    .command-strip {
+      margin-top: 22px;
+      padding: 20px 24px;
+    }
+
+    .command-heading {
+      margin: 0;
+
+      color: var(--green);
+    }
+
+    .command-subheading {
+      margin: 8px 0 12px;
+
+      color: #c9d0cc;
+      font-size: 0.88rem;
+    }
+
+    .quick-commands {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-command {
+      padding: 7px 13px;
+
+      border: 1px solid var(--line);
+      border-radius: 4px;
+
+      color: var(--green);
+      background: transparent;
+
+      cursor: pointer;
+
+      transition:
+        border-color 120ms ease,
+        background 120ms ease;
+    }
+
+    .quick-command:hover,
+    .quick-command:focus-visible {
+      border-color: var(--green);
+      background: rgba(103,255,124,0.06);
+      outline: none;
+    }
+
+    /* ---------- terminal ---------- */
+
+    .terminal {
+      margin-top: 26px;
+      overflow: hidden;
+    }
+
+    .terminal__titlebar {
+      min-height: 52px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 20px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .terminal__title {
+      color: var(--green);
+    }
+
+    .window-buttons {
+      display: flex;
+      gap: 18px;
+
+      color: var(--green-soft);
+      user-select: none;
+    }
+
+    .terminal__body {
+      min-height: 400px;
+      padding: 28px 24px;
+    }
+
+    #terminal-output {
+      min-height: 286px;
+    }
+
+    .terminal-block {
+      margin: 0 0 18px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .terminal-green {
+      color: var(--green);
+    }
+
+    .terminal-muted {
+      color: var(--muted);
+    }
+
+    .terminal-error {
+      color: var(--danger);
+    }
+
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-top: 18px;
+    }
+
+    .terminal-prompt {
+      flex: 0 0 auto;
+
+      color: var(--green);
+    }
+
+    #terminal-input {
+      width: 100%;
+
+      border: 0;
+      outline: 0;
+
+      color: var(--text);
+      background: transparent;
+
+      caret-color: var(--green);
+    }
+
+    /* ---------- easter egg cards ---------- */
+
+    .eggs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      margin-top: 28px;
+    }
+
+    .egg {
+      min-height: 120px;
+
+      padding: 22px;
+
+      border: 1px solid var(--line);
+      border-right: 0;
+    }
+
+    .egg:first-child {
+      border-radius: 7px 0 0 7px;
+    }
+
+    .egg:last-child {
+      border-right: 1px solid var(--line);
+      border-radius: 0 7px 7px 0;
+    }
+
+    .egg-title {
+      color: var(--green);
+    }
+
+    .egg p {
+      margin: 7px 0 0;
+
+      color: #c7ceca;
+      font-size: 0.85rem;
+    }
+
+    /* ---------- footer ---------- */
 
     footer {
-      margin-top: 64px;
+      padding-top: 46px;
+
+      text-align: center;
+
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
 
-    .cursor {
-      display: inline-block;
-      width: 0.65em;
-      height: 1.15em;
-      vertical-align: -0.18em;
-      background: var(--accent);
-      animation: blink 1s steps(1) infinite;
+    footer .vibes {
+      margin-top: 5px;
+
+      color: var(--green-soft);
+    }
+
+    /* ---------- secret mode ---------- */
+
+    body.party-mode {
+      animation: hue-party 2s linear infinite;
+    }
+
+    .konami-message {
+      position: fixed;
+      inset: auto 50% 34px auto;
+
+      transform: translateX(50%);
+
+      z-index: 200;
+
+      padding: 12px 18px;
+
+      border: 1px solid var(--green);
+      border-radius: 6px;
+
+      color: var(--green);
+
+      background: var(--bg);
+
+      box-shadow: 0 0 40px rgba(103,255,124,0.18);
+    }
+
+    /* ---------- responsive ---------- */
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 42px;
+
+        padding-top: 52px;
+      }
+
+      .status-panel {
+        max-width: none;
+      }
+
+      .eggs {
+        grid-template-columns: 1fr;
+      }
+
+      .egg,
+      .egg:first-child,
+      .egg:last-child {
+        border: 1px solid var(--line);
+        border-bottom: 0;
+        border-radius: 0;
+      }
+
+      .egg:first-child {
+        border-radius: 7px 7px 0 0;
+      }
+
+      .egg:last-child {
+        border-bottom: 1px solid var(--line);
+        border-radius: 0 0 7px 7px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .topbar {
+        min-height: 58px;
+      }
+
+      .topbar__right span:first-child {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 40px;
+      }
+
+      .name {
+        font-size: clamp(3.2rem, 19vw, 5.2rem);
+      }
+
+      .bio {
+        margin-top: 32px;
+      }
+
+      .socials {
+        flex-direction: column;
+      }
+
+      .social-link {
+        width: 100%;
+      }
+
+      .terminal__body {
+        padding: 22px 16px;
+      }
+
+      .command-strip {
+        padding: 18px 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
     }
 
     @keyframes blink {
@@ -138,36 +657,863 @@
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .cursor {
-        animation: none;
+    @keyframes hue-party {
+      from {
+        filter: hue-rotate(0deg);
+      }
+
+      to {
+        filter: hue-rotate(360deg);
       }
     }
   </style>
 </head>
 
 <body>
-  <main>
-    <div class="prompt">daniel@home:~$ whoami</div>
+  <div class="page">
 
-    <h1>Daniel.</h1>
+    <header class="topbar">
+      <div>daniel@home:~</div>
 
-    <p class="role">Principal Software Engineer @ Riot Games</p>
+      <div class="topbar__right">
+        <span>online</span>
+        <span class="status-dot" aria-label="online"></span>
+      </div>
+    </header>
 
-    <p class="bio">
-      I build software, games and occasionally questionable side projects.
-      Interested in systems, technology and making complicated things simpler.
-    </p>
+    <main>
 
-    <nav>
-      <a href="https://github.com/crazydan" target="_blank" rel="noopener">github</a>
-      <a href="https://www.linkedin.com/in/daniel-b-c-chan" target="_blank" rel="noopener">linkedin</a>
-      <a href="mailto:daniel@cowmeuh.net">daniel@cowmeuh.net</a>
-    </nav>
+      <section class="hero">
+        <div class="hero__intro">
+
+          <h1 class="name">
+            Daniel<span class="cursor-block" aria-hidden="true"></span>
+          </h1>
+
+          <p class="role">
+            Principal Software Engineer
+            <span class="comment">// builder of things</span>
+          </p>
+
+          <p class="bio">
+            I build games, distributed systems, and things that probably
+            didn't need automating.
+          </p>
+
+          <div class="location">
+            ⌖ Sydney, Australia
+          </div>
+
+          <nav class="socials" aria-label="Contact">
+            <a
+              class="social-link"
+              href="https://github.com/crazydan"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              github
+              <span class="social-link__external">↗</span>
+            </a>
+
+            <a
+              class="social-link"
+              href="https://www.linkedin.com/in/daniel-b-c-chan/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              linkedin
+              <span class="social-link__external">↗</span>
+            </a>
+
+            <a
+              class="social-link"
+              href="mailto:daniel@cowmeuh.net"
+            >
+              email
+              <span class="social-link__external">↗</span>
+            </a>
+          </nav>
+        </div>
+
+        <aside class="panel status-panel">
+
+          <h2 class="panel-title">
+            SYSTEM STATUS <span class="status-dot"></span>
+          </h2>
+
+          <div class="status-row">
+            <span>Website</span>
+            <span>operational</span>
+          </div>
+
+          <div class="status-row">
+            <span>Coffee</span>
+            <span>nominal</span>
+          </div>
+
+          <div class="status-row">
+            <span>Ideas</span>
+            <span>too many</span>
+          </div>
+
+          <div class="status-row">
+            <span>Sleep</span>
+            <span>optional</span>
+          </div>
+
+          <div class="status-row">
+            <span>Production</span>
+            <span>someone else's problem</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <h2 class="panel-title">SITE STATS</h2>
+
+          <div class="stat-row">
+            <span>HTML</span>
+            <span>1 file</span>
+          </div>
+
+          <div class="stat-row">
+            <span>Frameworks</span>
+            <span>0</span>
+          </div>
+
+          <div class="stat-row">
+            <span>Dependencies</span>
+            <span>0</span>
+          </div>
+
+          <div class="stat-row">
+            <span>Build step</span>
+            <span>none</span>
+          </div>
+
+          <div class="stat-row">
+            <span>Monthly cost</span>
+            <span>$0.00</span>
+          </div>
+
+          <div class="stat-row">
+            <span>Uptime</span>
+            <span>24/7*</span>
+          </div>
+
+          <p class="footnote">
+            * unless GitHub is down
+          </p>
+        </aside>
+      </section>
+
+      <section class="panel command-strip">
+        <p class="command-heading">
+          daniel@home:~$ help
+        </p>
+
+        <p class="command-subheading">
+          Try a command:
+        </p>
+
+        <div class="quick-commands" id="quick-commands">
+          <button class="quick-command" data-command="whoami">whoami</button>
+          <button class="quick-command" data-command="work">work</button>
+          <button class="quick-command" data-command="projects">projects</button>
+          <button class="quick-command" data-command="interests">interests</button>
+          <button class="quick-command" data-command="uptime">uptime</button>
+          <button class="quick-command" data-command="status">status</button>
+          <button class="quick-command" data-command="pet">pet</button>
+          <button class="quick-command" data-command="git log">git log</button>
+          <button class="quick-command" data-command="ps aux">ps aux</button>
+          <button class="quick-command" data-command="clear">clear</button>
+        </div>
+      </section>
+
+      <section class="panel terminal" aria-label="Interactive terminal">
+
+        <div class="terminal__titlebar">
+          <div class="terminal__title">
+            daniel@home:~$
+          </div>
+
+          <div class="window-buttons" aria-hidden="true">
+            <span>—</span>
+            <span>□</span>
+            <span>×</span>
+          </div>
+        </div>
+
+        <div
+          class="terminal__body"
+          id="terminal"
+          tabindex="0"
+          aria-label="Click to focus terminal"
+        >
+
+          <div id="terminal-output">
+
+            <div class="terminal-block">
+Welcome to daniel@home.
+
+Type <span class="terminal-green">help</span> to see available commands.
+            </div>
+
+            <div class="terminal-block terminal-green">
+   /\_/\
+  ( o.o )
+   > ^ <
+            </div>
+
+            <div class="terminal-block">
+"The best code is the code you don't have to maintain."
+            </div>
+
+          </div>
+
+          <form class="terminal-input-row" id="terminal-form">
+            <label class="terminal-prompt" for="terminal-input">
+              daniel@home:~$
+            </label>
+
+            <input
+              id="terminal-input"
+              name="command"
+              type="text"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              aria-label="Terminal command"
+            />
+          </form>
+
+        </div>
+      </section>
+
+      <section class="eggs">
+        <div class="egg">
+          <div class="egg-title">🎮 KONAMI CODE</div>
+          <p>↑ ↑ ↓ ↓ ← → ← → B A</p>
+          <p>(you know you want to)</p>
+        </div>
+
+        <div class="egg">
+          <div class="egg-title">&lt;/&gt; VIEW SOURCE</div>
+          <p>There might be something interesting in there.</p>
+        </div>
+
+        <div class="egg">
+          <div class="egg-title">&gt;_ DEV TOOLS</div>
+          <p>Try <code>daniel.help()</code> in the console.</p>
+        </div>
+      </section>
+
+    </main>
 
     <footer>
-      Sydney, Australia <span class="cursor"></span>
+      <div id="copyright"></div>
+      <div class="vibes">No frameworks. No tracking. Just vibes.</div>
     </footer>
-  </main>
+
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const output = document.querySelector("#terminal-output");
+      const form = document.querySelector("#terminal-form");
+      const input = document.querySelector("#terminal-input");
+      const terminal = document.querySelector("#terminal");
+
+      const history = [];
+      let historyIndex = 0;
+
+      const commands = {
+        help: `
+Available commands:
+
+  whoami       about me
+  work         what I do
+  projects     selected side quests
+  interests    current rabbit holes
+  uptime       important operational metrics
+  status       system health
+  pet          summon the resident daemon
+  feed         feed the resident daemon
+  git log      career history, obviously
+  ps aux       processes currently consuming CPU
+  sudo         exercise your authority
+  clear        clear terminal
+
+There may be undocumented commands.
+        `,
+
+        whoami: `
+Daniel
+Principal Software Engineer
+
+I build games, distributed systems,
+developer tools, automation, and
+occasionally questionable side projects.
+
+I like making complicated things simpler.
+        `,
+
+        work: `
+$ cat work.txt
+
+Things I enjoy:
+
+  • game technology
+  • large-scale systems
+  • architecture
+  • developer experience
+  • automation
+  • AI-assisted engineering
+  • removing unnecessary complexity
+
+Current objective:
+
+  maximize interesting problems
+  minimize unnecessary meetings
+        `,
+
+        projects: `
+$ ls ~/projects
+
+  game-experiments/
+  recommendation-things/
+  automation-everywhere/
+  ai-rabbit-holes/
+  unfinished-side-project-37/
+
+README:
+
+Most side projects begin with:
+
+  "This should only take an evening."
+        `,
+
+        interests: `
+$ cat interests.txt
+
+games
+distributed systems
+AI
+automation
+developer tooling
+product engineering
+Japanese
+side projects
+making computers do unnecessary things
+        `,
+
+        uptime: `
+$ uptime
+
+website:
+  operational
+
+dependencies:
+  0
+
+monthly infrastructure cost:
+  $0.00
+
+side projects completed:
+  statistically insignificant
+        `,
+
+        status: `
+SYSTEM STATUS
+
+Website        operational
+Coffee         nominal
+Ideas          too many
+Sleep          optional
+Side projects  accumulating
+Production     someone else's problem
+        `,
+
+        "git log": `
+$ git log --oneline career
+
+a18cf72  principal-software-engineer
+91deac4  built-a-lot-of-game-tech
+2f813bb  distributed-systems-happened
+771bd02  automated-the-boring-parts
+09c221a  discovered-computers
+        `,
+
+        "ps aux": `
+$ ps aux
+
+PID   CPU   PROCESS
+
+101   41%   building-things
+203   27%   experimenting-with-ai
+317   18%   automating-everything
+411    9%   learning-japanese
+999    5%   finishing-side-projects
+        `,
+
+        pet: () => {
+          const fed = Number(localStorage.getItem("daniel.petFed") || "0");
+
+          return `
+ /\_/\
+( o.o )
+ > ^ <
+
+resident daemon status:
+${fed ? `fed ${fed} time${fed === 1 ? "" : "s"} ✓` : "hungry"}
+
+Try:
+
+  feed
+          `;
+        },
+
+        feed: () => {
+          const current =
+            Number(localStorage.getItem("daniel.petFed") || "0") + 1;
+
+          localStorage.setItem("daniel.petFed", String(current));
+
+          return `
+ /\_/\
+( ^.^ )
+ > ^ <
+
+cronchy.
+
+feeding count persisted to localStorage:
+${current}
+
+Yes, this website has state now.
+We have gone too far.
+          `;
+        },
+
+        sudo: `
+Daniel is not in the sudoers file.
+
+This incident will be reported.
+        `,
+
+        vim: `
+You have entered vim.
+
+To exit:
+
+1. press Esc
+2. type :q!
+3. question your life choices
+        `,
+
+        emacs: `
+Nice try.
+
+This website does not contain enough disk space.
+        `,
+
+        "npm install": `
+npm ERR! enoent
+
+package.json not found.
+
+There are no dependencies.
+
+This is intentional.
+        `,
+
+        npm: `
+No.
+        `,
+
+        "kubectl get pods": `
+No resources found.
+
+Also:
+
+this is a static HTML file.
+
+Please stop trying to deploy Kubernetes.
+        `,
+
+        kubectl: `
+Absolutely not.
+        `,
+
+        docker: `
+Unable to connect to Docker daemon.
+
+Because there isn't one.
+
+It's an HTML file.
+        `,
+
+        "rm -rf /": `
+Permission denied.
+
+Thankfully.
+        `,
+
+        rm: `
+I saw that.
+        `,
+
+        ls: `
+index.html
+
+That's it.
+That's the website.
+        `,
+
+        pwd: `
+/home/daniel/the-internet
+        `,
+
+        date: () => new Date().toString(),
+
+        echo: `
+Try harder.
+        `,
+
+        hello: `
+Hello, human.
+        `,
+
+        hi: `
+👋
+        `,
+
+        exit: `
+There is nowhere to exit to.
+
+You are already on the internet.
+        `,
+
+        "42": `
+The answer is 42.
+
+The question remains in backlog.
+        `,
+
+        coffee: `
+Coffee subsystem:
+
+STATUS: nominal
+LATENCY: acceptable
+REPLICATION: unnecessary
+        `,
+
+        clear: "__CLEAR__"
+      };
+
+      function normalizeCommand(value) {
+        return value
+          .trim()
+          .replace(/\s+/g, " ")
+          .toLowerCase();
+      }
+
+      function escapeHtml(value) {
+        return value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+
+      function appendCommand(command) {
+        const row = document.createElement("div");
+        row.className = "terminal-block";
+
+        row.innerHTML =
+          `<span class="terminal-green">daniel@home:~$</span> ` +
+          escapeHtml(command);
+
+        output.appendChild(row);
+      }
+
+      function appendOutput(text, className = "") {
+        const block = document.createElement("div");
+
+        block.className = `terminal-block ${className}`.trim();
+        block.textContent = text.trim();
+
+        output.appendChild(block);
+      }
+
+      function runCommand(rawCommand) {
+        const command = normalizeCommand(rawCommand);
+
+        if (!command) {
+          return;
+        }
+
+        appendCommand(rawCommand);
+
+        history.push(rawCommand);
+        historyIndex = history.length;
+
+        if (command === "clear") {
+          output.innerHTML = "";
+          return;
+        }
+
+        let result = commands[command];
+
+        if (typeof result === "function") {
+          result = result();
+        }
+
+        if (result !== undefined) {
+          appendOutput(result);
+          scrollToBottom();
+          return;
+        }
+
+        if (command.startsWith("sudo ")) {
+          appendOutput(
+            "Permission denied.\n\nAuthority level insufficient.",
+            "terminal-error"
+          );
+
+          scrollToBottom();
+          return;
+        }
+
+        if (command.startsWith("echo ")) {
+          appendOutput(rawCommand.slice(5));
+          scrollToBottom();
+          return;
+        }
+
+        if (command === "help --verbose") {
+          appendOutput(
+            "Nice try.\n\nThe undocumented commands are undocumented.",
+            "terminal-green"
+          );
+
+          scrollToBottom();
+          return;
+        }
+
+        appendOutput(
+          `command not found: ${command}\n\nTry "help".`,
+          "terminal-error"
+        );
+
+        scrollToBottom();
+      }
+
+      function scrollToBottom() {
+        requestAnimationFrame(() => {
+          terminal.scrollTop = terminal.scrollHeight;
+        });
+      }
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const value = input.value;
+        input.value = "";
+
+        runCommand(value);
+      });
+
+      terminal.addEventListener("click", () => {
+        input.focus();
+      });
+
+      input.addEventListener("keydown", event => {
+        if (event.key === "ArrowUp") {
+          event.preventDefault();
+
+          if (!history.length) {
+            return;
+          }
+
+          historyIndex = Math.max(0, historyIndex - 1);
+          input.value = history[historyIndex] || "";
+        }
+
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+
+          if (!history.length) {
+            return;
+          }
+
+          historyIndex =
+            Math.min(history.length, historyIndex + 1);
+
+          input.value = history[historyIndex] || "";
+        }
+
+        if (
+          event.key === "l" &&
+          (event.ctrlKey || event.metaKey)
+        ) {
+          event.preventDefault();
+          output.innerHTML = "";
+        }
+      });
+
+      document
+        .querySelector("#quick-commands")
+        .addEventListener("click", event => {
+          const button = event.target.closest("[data-command]");
+
+          if (!button) {
+            return;
+          }
+
+          runCommand(button.dataset.command);
+          input.focus();
+        });
+
+      /* ---------- Konami code ---------- */
+
+      const konamiSequence = [
+        "ArrowUp",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowLeft",
+        "ArrowRight",
+        "b",
+        "a"
+      ];
+
+      let konamiIndex = 0;
+
+      window.addEventListener("keydown", event => {
+        if (event.key === konamiSequence[konamiIndex]) {
+          konamiIndex += 1;
+
+          if (konamiIndex === konamiSequence.length) {
+            activateKonami();
+            konamiIndex = 0;
+          }
+        } else {
+          konamiIndex = 0;
+        }
+      });
+
+      function activateKonami() {
+        document.body.classList.add("party-mode");
+
+        const message = document.createElement("div");
+
+        message.className = "konami-message";
+        message.textContent =
+          "Achievement unlocked: inspected the obvious Easter egg.";
+
+        document.body.appendChild(message);
+
+        setTimeout(() => {
+          document.body.classList.remove("party-mode");
+          message.remove();
+        }, 5000);
+
+        runCommand("pet");
+      }
+
+      /* ---------- developer console API ---------- */
+
+      const daniel = {
+        help() {
+          console.log(`
+daniel.help()
+
+Available console commands:
+
+  daniel.whoami()
+  daniel.pet()
+  daniel.source()
+  daniel.secret()
+          `);
+        },
+
+        whoami() {
+          console.log(
+            "%cDaniel — Principal Software Engineer",
+            "color:#67ff7c;font-size:16px"
+          );
+
+          console.log(
+            "You opened DevTools on a one-file website.\nI like you already."
+          );
+        },
+
+        pet() {
+          console.log(`
+ /\\_/\\
+( o.o )
+ > ^ <
+
+The cat also lives in DevTools.
+          `);
+        },
+
+        source() {
+          console.log(
+            "You already know what to do: View Source."
+          );
+        },
+
+        secret() {
+          console.log(
+            "%cThere is no secret.",
+            "color:#67ff7c"
+          );
+
+          setTimeout(() => {
+            console.log("...probably.");
+          }, 700);
+        }
+      };
+
+      window.daniel = daniel;
+
+      console.log(
+        "%cHey.",
+        "color:#67ff7c;font-size:24px;font-weight:bold"
+      );
+
+      console.log(`
+You opened DevTools on a website
+consisting of one HTML file.
+
+Good choice.
+
+Try:
+
+  daniel.help()
+      `);
+
+      /* ---------- footer ---------- */
+
+      document.querySelector("#copyright").textContent =
+        `© ${new Date().getFullYear()} Daniel`;
+
+      /* ---------- tiny initial hint ---------- */
+
+      setTimeout(() => {
+        if (!localStorage.getItem("daniel.visited")) {
+          localStorage.setItem("daniel.visited", "1");
+
+          console.log(
+            "%cFirst visit detected. Welcome.",
+            "color:#67ff7c"
+          );
+        }
+      }, 500);
+    })();
+  </script>
 </body>
 </html>
