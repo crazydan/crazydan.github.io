@@ -348,55 +348,6 @@
       font-size: 0.78rem;
     }
 
-    /* ---------- command bar ---------- */
-
-    .command-strip {
-      margin-top: 22px;
-      padding: 20px 24px;
-    }
-
-    .command-heading {
-      margin: 0;
-
-      color: var(--green);
-    }
-
-    .command-subheading {
-      margin: 8px 0 12px;
-
-      color: #c9d0cc;
-      font-size: 0.88rem;
-    }
-
-    .quick-commands {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .quick-command {
-      padding: 7px 13px;
-
-      border: 1px solid var(--line);
-      border-radius: 4px;
-
-      color: var(--green);
-      background: transparent;
-
-      cursor: pointer;
-
-      transition:
-        border-color 120ms ease,
-        background 120ms ease;
-    }
-
-    .quick-command:hover,
-    .quick-command:focus-visible {
-      border-color: var(--green);
-      background: rgba(103,255,124,0.06);
-      outline: none;
-    }
-
     /* ---------- terminal ---------- */
 
     .terminal {
@@ -635,9 +586,6 @@
         padding: 22px 16px;
       }
 
-      .command-strip {
-        padding: 18px 16px;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -804,29 +752,6 @@
             * unless GitHub is down
           </p>
         </aside>
-      </section>
-
-      <section class="panel command-strip">
-        <p class="command-heading">
-          daniel@home:~$ help
-        </p>
-
-        <p class="command-subheading">
-          Try a command:
-        </p>
-
-        <div class="quick-commands" id="quick-commands">
-          <button class="quick-command" data-command="whoami">whoami</button>
-          <button class="quick-command" data-command="work">work</button>
-          <button class="quick-command" data-command="projects">projects</button>
-          <button class="quick-command" data-command="interests">interests</button>
-          <button class="quick-command" data-command="uptime">uptime</button>
-          <button class="quick-command" data-command="status">status</button>
-          <button class="quick-command" data-command="pet">pet</button>
-          <button class="quick-command" data-command="git log">git log</button>
-          <button class="quick-command" data-command="ps aux">ps aux</button>
-          <button class="quick-command" data-command="clear">clear</button>
-        </div>
       </section>
 
       <section class="panel terminal" aria-label="Interactive terminal">
@@ -1360,19 +1285,6 @@ REPLICATION: unnecessary
           output.innerHTML = "";
         }
       });
-
-      document
-        .querySelector("#quick-commands")
-        .addEventListener("click", event => {
-          const button = event.target.closest("[data-command]");
-
-          if (!button) {
-            return;
-          }
-
-          runCommand(button.dataset.command);
-          input.focus();
-        });
 
       /* ---------- Konami code ---------- */
 
