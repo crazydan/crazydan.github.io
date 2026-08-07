@@ -192,3 +192,5 @@ Keep the site small, fast, and static.
 Prefer improving `index.html` in place unless the file becomes genuinely painful to maintain. Splitting CSS or JavaScript into separate files is possible, but the current one-file design is intentional.
 
 Avoid adding third-party scripts, trackers, package managers, or build steps unless there is a very good reason.
+
+AI-assisted session handoff notes live in `docs/ai/`.
