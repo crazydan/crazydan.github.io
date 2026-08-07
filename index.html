@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Daniel</title>
+  <meta
+    name="description"
+    content="Software engineer. Builder of things."
+  />
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f10;
+      --text: #d7e0df;
+      --muted: #778582;
+      --accent: #71f79f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+
+      background:
+        radial-gradient(circle at 50% 30%, #13201a 0%, transparent 35%),
+        var(--bg);
+
+      color: var(--text);
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+    }
+
+    main {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .prompt {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2.8rem, 10vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.08em;
+    }
+
+    .role {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .bio {
+      max-width: 580px;
+      margin-bottom: 40px;
+      font-family: system-ui, sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      line-height: 1.55;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+    }
+
+    a {
+      position: relative;
+      color: var(--text);
+      text-decoration: none;
+      padding-bottom: 4px;
+    }
+
+    a::before {
+      content: "> ";
+      color: var(--accent);
+    }
+
+    a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: var(--accent);
+
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 160ms ease;
+    }
+
+    a:hover::after,
+    a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    footer {
+      margin-top: 64px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 0.65em;
+      height: 1.15em;
+      vertical-align: -0.18em;
+      background: var(--accent);
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="prompt">daniel@home:~$ whoami</div>
+
+    <h1>Daniel.</h1>
+
+    <p class="role">Principal Software Engineer @ Riot Games</p>
+
+    <p class="bio">
+      I build software, games and occasionally questionable side projects.
+      Interested in systems, technology and making complicated things simpler.
+    </p>
+
+    <nav>
+      <a href="https://github.com/crazydan" target="_blank" rel="noopener">github</a>
+      <a href="https://www.linkedin.com/in/daniel-b-c-chan" target="_blank" rel="noopener">linkedin</a>
+      <a href="mailto:daniel@cowmeuh.net">daniel@cowmeuh.net</a>
+    </nav>
+
+    <footer>
+      Sydney, Australia <span class="cursor"></span>
+    </footer>
+  </main>
+</body>
+</html>
