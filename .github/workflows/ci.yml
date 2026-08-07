@@ -1,0 +1,151 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-policy:
+    name: Static Site Policy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check project constraints
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          root = Path(".")
+          errors = []
+
+          required_files = [
+              "index.html",
+              "CNAME",
+              "README.md",
+              "AGENTS.md",
+          ]
+
+          for file_name in required_files:
+              if not (root / file_name).is_file():
+                  errors.append(f"missing required file: {file_name}")
+
+          cname = (root / "CNAME").read_text(encoding="utf-8").strip()
+          if cname != "cowmeuh.net":
+              errors.append("CNAME must contain exactly: cowmeuh.net")
+
+          forbidden_paths = [
+              "package.json",
+              "package-lock.json",
+              "pnpm-lock.yaml",
+              "yarn.lock",
+              "bun.lockb",
+              "node_modules",
+              "vite.config.js",
+              "vite.config.ts",
+              "webpack.config.js",
+              "tailwind.config.js",
+              "next.config.js",
+              "astro.config.mjs",
+          ]
+
+          for path in forbidden_paths:
+              if (root / path).exists():
+                  errors.append(f"unexpected dependency/build artifact: {path}")
+
+          index = (root / "index.html").read_text(encoding="utf-8")
+
+          required_snippets = [
+              "<title>Daniel",
+              'name="description"',
+              'name="viewport"',
+              'name="theme-color"',
+              'property="og:title"',
+              'property="og:description"',
+              'property="og:type"',
+              "You looked at the source.",
+              "window.daniel",
+              "localStorage",
+              "konamiSequence",
+          ]
+
+          for snippet in required_snippets:
+              if snippet not in index:
+                  errors.append(f"index.html missing expected snippet: {snippet}")
+
+          external_runtime_patterns = [
+              r"<script\b[^>]*\bsrc=",
+              r"<link\b[^>]*\brel=[\"']stylesheet[\"'][^>]*\bhref=[\"']https?://",
+              r"<iframe\b",
+          ]
+
+          for pattern in external_runtime_patterns:
+              if re.search(pattern, index, flags=re.IGNORECASE):
+                  errors.append(f"index.html contains disallowed runtime dependency: {pattern}")
+
+          if errors:
+              for error in errors:
+                  print(f"::error::{error}")
+              sys.exit(1)
+
+          print("Static-site constraints passed.")
+          PY
+
+  html-validation:
+    name: HTML Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install validator
+        run: python3 -m pip install --disable-pip-version-check html5validator
+
+      - name: Validate HTML
+        run: html5validator --root . --match ".*\\.html$"
+
+  link-check:
+    name: Link Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --exclude-mail
+            --exclude 'https://www.linkedin.com/.*'
+            './**/*.html'
+            './**/*.md'
+          fail: true

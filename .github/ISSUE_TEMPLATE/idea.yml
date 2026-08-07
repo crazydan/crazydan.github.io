@@ -1,0 +1,27 @@
+name: Idea
+description: Suggest a small improvement or Easter egg.
+title: "Idea: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What would make the site better, weirder, or more useful?
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - Professional polish
+        - Terminal command
+        - Easter egg
+        - Accessibility
+        - Performance
+        - Documentation
+        - Other
+    validations:
+      required: true

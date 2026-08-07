@@ -1,0 +1,14 @@
+.DS_Store
+.idea/
+.vscode/
+
+# Local static servers and scratch files
+.http-server/
+*.log
+
+# Keep the production site dependency-free.
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb

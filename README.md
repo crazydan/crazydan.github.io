@@ -81,6 +81,64 @@ The custom domain is configured via `CNAME`:
 cowmeuh.net
 ```
 
+## Development Workflow
+
+Use `main` as the production branch. Changes should go through short-lived branches and pull requests, even as a solo developer.
+
+Typical flow:
+
+```sh
+git switch main
+git pull --ff-only
+git switch -c feature/small-clear-name
+```
+
+Make the change, commit it, then push the branch:
+
+```sh
+git push -u origin feature/small-clear-name
+```
+
+Open a pull request on GitHub, wait for CI, review the diff, then squash merge into `main`.
+
+Branch naming conventions:
+
+- `feature/...` for new commands, visual polish, or content
+- `fix/...` for bugs
+- `content/...` for copy/contact updates
+- `chore/...` for repository maintenance
+
+Keep PRs small enough that the full diff can be reviewed in a few minutes.
+
+## Continuous Integration
+
+GitHub Actions runs on pull requests and pushes to `main`.
+
+The workflow checks:
+
+- Required project files exist
+- `CNAME` still points at `cowmeuh.net`
+- Required metadata and Easter eggs are still present
+- No runtime dependency or build-tool files were introduced
+- HTML validates
+- Links in HTML and Markdown resolve
+
+CI tooling is intentionally limited to GitHub Actions. The website itself still has no runtime dependencies and no build step.
+
+## Recommended GitHub Settings
+
+Configure these in the GitHub repository settings:
+
+- Enable GitHub Pages from `main` / root
+- Protect the `main` branch
+- Require a pull request before merging
+- Require status checks to pass before merging
+- Require branches to be up to date before merging
+- Use squash merge by default
+- Automatically delete head branches after merge
+
+For a solo personal site, requiring another reviewer is optional and probably unnecessary.
+
 ## Features
 
 - Professional hero section
