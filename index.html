@@ -174,7 +174,7 @@
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 350px;
+      grid-template-columns: minmax(0, 1fr) 400px;
       gap: 56px;
 
       padding: 72px 0 36px;
@@ -716,6 +716,30 @@
 
           <div class="divider"></div>
 
+          <h2 class="panel-title">NOW</h2>
+
+          <div class="status-row">
+            <span>Building</span>
+            <span>side projects</span>
+          </div>
+
+          <div class="status-row">
+            <span>Exploring</span>
+            <span>AI-assisted engineering</span>
+          </div>
+
+          <div class="status-row">
+            <span>Learning</span>
+            <span>Japanese</span>
+          </div>
+
+          <div class="status-row">
+            <span>Status</span>
+            <span>interesting conversations</span>
+          </div>
+
+          <div class="divider"></div>
+
           <h2 class="panel-title">SITE STATS</h2>
 
           <div class="stat-row">
@@ -861,6 +885,7 @@ Available commands:
   work         what I do
   projects     selected side quests
   interests    current rabbit holes
+  now          current signal
   uptime       important operational metrics
   status       system health
   pet          summon the resident daemon
@@ -931,6 +956,17 @@ product engineering
 Japanese
 side projects
 making computers do unnecessary things
+        `,
+
+        now: `
+$ cat now.txt
+
+Building      side projects
+Exploring     AI-assisted engineering
+Learning      Japanese
+Status        available for interesting conversations
+
+Last updated  manually, like nature intended
         `,
 
         uptime: `
